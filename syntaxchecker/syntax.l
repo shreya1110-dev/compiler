@@ -14,7 +14,8 @@ delim [ \t]+
 %%
 {term} {return ID;}
 {delim} {return DELIM;}
-[+*\-/] {return OP;}
+[+\-] {return ADDOP;}
+[*/] {return MULOP;}
 {num} {return NUM;} 
 "\n" {cnt++;}
 "=" {return ASSIGN;}

@@ -19,17 +19,16 @@
 %type<intval> NUM
 
 %%
-program: /*empty*/ |mulexp
-mulexp: ID ASSIGN ID MULOP expr {printf("t%d = %s %s %s\n%s = t%d\n",tc,$3,$4,$5,$1,tc); tc++;} program|addexp;
-addexp: ID ASSIGN ID ADDOP expr {printf("t%d = %s %s %s\n%s = t%d\n",tc,$3,$4,$5,$1,tc); tc++;} program;
+program: mulexp
+mulexp: ID ASSIGN ID MULOP expr {printf("t%d = %s %s %s\n%s = t%d",tc,$3,$4,$5,$1,tc); tc++;} program|addexp;
+addexp: ID ASSIGN ID ADDOP expr {printf("t%d = %s %s %s\n%s = t%d",tc,$3,$4,$5,$1,tc); tc++;} program;
 expr: ID {sprintf($$,"%s",$1);}
 |ID MULOP expr {printf("t%d = %s %s %s\n",tc,$1,$2,$3); sprintf($$,"t%d",tc); tc++;}
 |ID ADDOP expr {printf("t%d = %s %s %s\n",tc,$1,$2,$3); sprintf($$,"t%d",tc); tc++;};
-
 %%
 
 void yyerror(char *s) {
-    fprintf(stderr,"%s",s);
+    fprintf(stderr,"  %s",s);
     return;
 }
 

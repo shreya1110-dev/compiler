@@ -1,0 +1,7 @@
+t1 = b * c
+t2 = a + t1
+x = t2
+t3 = y + k
+x = t3
+t4 = x + y
+z = t4

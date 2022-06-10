@@ -50,24 +50,33 @@ extern int yydebug;
   enum yytokentype
   {
     ID = 258,
-    DELIM = 259,
-    MULOP = 260,
+    NUM = 259,
+    ASSIGN = 260,
     ADDOP = 261,
-    NUM = 262,
-    ASSIGN = 263
+    MULOP = 262
   };
 #endif
 /* Tokens.  */
 #define ID 258
-#define DELIM 259
-#define MULOP 260
+#define NUM 259
+#define ASSIGN 260
 #define ADDOP 261
-#define NUM 262
-#define ASSIGN 263
+#define MULOP 262
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 13 "codegen.y"
+
+    int intval;
+    float floatval;
+    char *str;
+
+#line 77 "y.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

@@ -1,3 +1,3 @@
 x=a+b*c
-y=x+k
+x=y+k
 z=x+y

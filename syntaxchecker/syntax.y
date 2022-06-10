@@ -9,13 +9,13 @@
     extern int cnt;
 %}
 
-%token ID DELIM OP NUM ASSIGN
+%token ID DELIM MULOP ADDOP NUM ASSIGN
 
 %%
-program: line program|line
-line: assignment';'
-assignment: ID ASSIGN expr
-expr: '('expr')'|expr OP expr|ID|NUM
+program: |mulex;
+mulex: ID ASSIGN ID MULOP expr program|addex;
+addex: ID ASSIGN ID ADDOP expr program;
+expr: ID|ID MULOP ID|ID ADDOP ID; 
 %%
 
 void yyerror(char *s) {
